@@ -7,6 +7,6 @@ int main() {
     int a = 26;
     int b = 5;
 
-    cout << a*b
+    cout << a << " * " << b << " = "<< a*b;
     return 0;
 }
