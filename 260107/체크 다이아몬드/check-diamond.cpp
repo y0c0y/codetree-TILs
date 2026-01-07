@@ -8,43 +8,72 @@ int main() {
 
     cin >> n;
 
-    int k = 0;
+    int oriN = n;
+
+    int k = n;
 
     n *=2;
     n--;
 
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < oriN; i++)
     {
-        if(i == n/2) cout << '*';
-        else cout << ' ';
-        for(int j = 1; j < n-1; j++)
+        k--;
+        int j = 0;
+        for(; j < k ; j++)
         {
-            if(i%2 != 0)
+            cout << ' ';
+        }
+        bool flag = true;
+        for(; j < n - k; j++)
+        {
+            if(flag)
             {
-                if(j%2 ==0)
-                {
-                    cout << ' ';
-                }
-                else{
-                    cout << '*';
-                }
-
+                cout << '*';
             }
             else
             {
-                 if(j%2 ==0)
-                {
-                    cout << '*';
-                }
-                else{
-                    cout << ' ';
-                }
+                cout <<' ';
             }
+
+            flag = !flag;
         }
+        for(; j < n ; j++)
+        {
+            
+            cout << ' ';
+        }
+        cout << '\n';
 
-        if(i == n/2) cout << '*';
-        else cout << ' ';
+    }
 
+    k = 0;
+     for(int i = 0; i < oriN - 1; i++)
+    {
+        k++;
+       
+        for(int j = 0; j < k ; j++)
+        {
+            cout << ' ';
+        }
+        bool flag = true;
+        for(int j = k; j < n - k; j++)
+        {
+            if(flag)
+            {
+                cout << '*';
+            }
+            else
+            {
+                cout <<' ';
+            }
+
+            flag = !flag;
+        }
+        for(int j = n-k ; j < n ; j++)
+        {
+            
+            cout <<' ';
+        }
         cout << '\n';
 
     }
