@@ -24,13 +24,13 @@ int main() {
             // cout << A[i-1] << ' ' << i-1 <<'\n';
             // cout << cnt <<'\n';
             result += A[i-1];
-            result += cnt + '0';
+            result += to_string(cnt);
             cnt = 1;
         }
     }
 
     result += A[len-1];
-    result += cnt + '0';
+    result += to_string(cnt);
 
     cout << result.length()<<'\n';
     cout << result;
