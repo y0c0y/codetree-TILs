@@ -9,10 +9,12 @@ int main() {
     string str;
     string result = "";
 
+    cin >> n;
+
     for(int i = 0; i < n; i++)
     {
-        cin << str;
-        result+= str;
+        cin >> str;
+        result += str;
     }
 
     cout << result;
