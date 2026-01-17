@@ -13,9 +13,8 @@ int main() {
     int len_input = input_str.length();
     int len_target = target_str.length();
 
-    // bool exits = false;
     bool isCorrect = true;
-    int idx = 0;
+    int idx = -1;
 
     for(int i = 0; i < len_input - len_target +  1; i ++)
     {
@@ -29,12 +28,14 @@ int main() {
 
         if(isCorrect)
         {
-            // idx = i;
-            cout<< i;
+            idx = i;
             break;
         }
         
     }
+
+    cout << idx;
+
 
 
     // Please write your code here.
