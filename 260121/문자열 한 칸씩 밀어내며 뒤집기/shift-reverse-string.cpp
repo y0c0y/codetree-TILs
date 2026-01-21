@@ -9,7 +9,6 @@ int main() {
     cin >> input_str >> q;
 
     int len = input_str.length();
-    string tmp;
 
     for (int i = 0; i < q; i++) {
         int query_type;
@@ -18,25 +17,21 @@ int main() {
         switch(query_type)
         {
             case 1:
-            tmp = input_str.substr(1, len-1) + input_str.substr(0,1);
-            cout << tmp << "\n";
-            input_str = tmp;
-
+            input_str = input_str.substr(1, len-1) + input_str.substr(0,1);
             break;
+
             case 2:
-            tmp = input_str.substr(len-1, 1) + input_str.substr(0,len-1);
-            cout << tmp << "\n";
-            input_str = tmp;
+            input_str = input_str.substr(len-1, 1) + input_str.substr(0,len-1);
             break;
 
             case 3:
             reverse(input_str.begin(), input_str.end());
-            cout << input_str << "\n";
             break;
             
             default:
             break;
         }
+            cout << input_str << "\n";
     }
 
     // Please write your code here.
