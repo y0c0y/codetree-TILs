@@ -9,7 +9,9 @@ int main() {
 
     int result = 0;
 
-    int len= 0;
+    int len = 0;
+
+    bool allInt = true;
 
     for(int c = 0; c < 2; c++)
     {
@@ -22,11 +24,19 @@ int main() {
             if(str[i] < '0' || str[i] > '9') 
             {
                 string tmp = str.substr(0, i);
-
                 result += stoi(tmp);
+
+                allInt = false;
                 break;
             }
         }
+
+        if(allInt) 
+        {
+            result += stoi(str);
+        }
+
+        allInt = true;
 
     }
 
