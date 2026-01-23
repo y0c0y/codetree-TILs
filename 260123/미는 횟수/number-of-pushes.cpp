@@ -18,7 +18,7 @@ int main() {
 
     for(int i = 0; i < len; i++)
     {
-        tmp = A.substr(1, len-1) + A.substr(0,1);
+        tmp = A.substr(len-1, 1) + A.substr(0,len-1);
 
         if(tmp == B)
         {
