@@ -5,42 +5,80 @@ using namespace std;
 int n;
 int arr[10];
 
-int gcd(int a, int b)
-{
-    if(b == 0) return a;
-    return gcd(b, a%b);
-}
+// int gcd(int a, int b)
+// {
+//     if(b == 0) return a;
+//     return gcd(b, a%b);
+// }
 
-bool compare(int a, int b)
-{
-    return a > b;
-}
+// int lcm(int a, int b)
+// {
+//     return a * b / gcd(a,b);
+// }
+
+// bool compare(int a, int b)
+// {
+//     return a > b;
+// }
 
 int main() {
-    cin >> n;
 
-    int total = 1;
+    vector<int> brr;
+    cin >> n;
 
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
-
-        total *= arr[i];
     }
 
-   sort(arr, arr + 10, compare);
+    int max = 1;
 
-   int allGCD = 1;
+    bool exits = false;
 
-    for (int i = 0; i < n - 1; i++)
+    int cnt = 0;
+
+    while(cnt != n)
     {
-        for(int j = i + 1; j < n; j++)
+        for (int i = 0; i < n; i++) 
         {
-            allGCD *= gcd(arr[i], arr[j]);
+            if(max % arr[i] != 0) 
+            {
+                exits = true;
+                break;
+            }
+            else
+            {
+                cnt++;
+            }
+        }
+
+        if(exits)
+        {
+            cnt = 0;
+            exits = false;
+            max++;
         }
     }
 
-    cout << total/allGCD;
+    cout << max;
 
+//    sort(arr, arr + 10, compare);
+
+//    int allGCD = 1;
+
+//     for (int i = 0; i < n - 1; i++)
+//     {
+//         for(int j = i + 1; j < n; j++)
+//         {
+//             brr.push_back(gcd(arr[i], arr[j]));
+//         }
+//     }
+
+//     sort(brr.begin(), brr.end());
+
+//     for(auto j : brr)
+//     {
+//         cout << j << ' ';
+//     }
 
     
 
