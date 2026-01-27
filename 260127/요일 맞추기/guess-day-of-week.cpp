@@ -32,7 +32,15 @@ int main() {
 
     total_m2 += d2;
 
-    cout<<weekStr[abs(total_m2 - total_m1 + 7) % 7];
 
+    int tmp = total_m2 - total_m1;
+
+    if(tmp < 0)
+    {
+        tmp = 7 - abs(tmp)%7;
+    }
+    else tmp = tmp % 7;
+
+    cout<<weekStr[tmp];
     return 0;
 }
