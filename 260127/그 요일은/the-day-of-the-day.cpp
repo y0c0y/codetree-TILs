@@ -41,7 +41,9 @@ int main() {
 
     total_m2 += d2;
 
-    int tmp = (total_m2 - total_m1) / 7 + 1;
+    int tmp = (total_m2 - total_m1) / 7;
+
+    if(tmp > 0) tmp++;
 
     cout<<tmp;
     return 0;
