@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -6,7 +6,7 @@ int m1, d1, m2, d2;
 
 int numOfDays[13] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
 
-string weekStr[8] = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
+string weekStr[7] = {"Sun","Mon","Tue","Wed","Thu","Fri","Sat"};
 
 int main() {
     cin >> m1 >> d1 >> m2 >> d2;
@@ -32,7 +32,7 @@ int main() {
 
     total_m2 += d2;
 
-    cout<<weekStr[(total_m2-total_m1+1)%7];
+    cout<<weekStr[abs(total_m2-total_m1 + 1)%7];
 
     return 0;
 }
