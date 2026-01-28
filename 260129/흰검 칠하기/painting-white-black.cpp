@@ -45,7 +45,7 @@ int main() {
             else
             {
                 tie(white, black, isWhite) = arr[idx];
-                tmp = offset == 1 ? make_tuple(white,black+1, !isWhite) : make_tuple(white + 1,black, !isWhite);
+                tmp = offset == 1 ? make_tuple(white,black+1, false) : make_tuple(white + 1,black, true);
                 arr[idx] = tmp;
             }
         }
