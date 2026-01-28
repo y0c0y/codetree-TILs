@@ -1,15 +1,14 @@
 #include <iostream>
-#include <vector>
+#include <unordered_map>
 
 using namespace std;
 
-// 최대 이동 거리를 고려해 배열 크기 설정 (N=1000, x=100 기준 넉넉히 20만)
-const int MAX = 200005;
-const int OFFSET = 100000;
-
-int white_cnt[MAX]; // 흰색으로 칠해진 횟수
-int black_cnt[MAX]; // 검은색으로 칠해진 횟수
-int tile_color[MAX]; // 0: 없음, 1: 흰색, 2: 검은색, 3: 회색
+// 데이터를 담는 가벼운 구조체
+struct Tile {
+    int w = 0;
+    int b = 0;
+    int color = 0; // 1: W, 2: B, 3: G
+};
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -18,52 +17,47 @@ int main() {
     int n;
     cin >> n;
 
-    int cur = OFFSET;
+    // 해시 맵 사용 (속도 향상)
+    unordered_map<int, Tile> board;
+    int cur = 0;
 
     for (int i = 0; i < n; i++) {
-        int x;
-        char dir;
+        int x; char dir;
         cin >> x >> dir;
 
         if (dir == 'L') {
-            // 왼쪽으로 이동하며 x칸 칠하기
             int target = cur - x + 1;
             for (int j = cur; j >= target; j--) {
-                if (tile_color[j] == 3) continue; // 이미 회색이면 패스
+                auto& t = board[j]; // 참조자를 사용해 단 한 번만 접근
+                if (t.color == 3) continue;
 
-                white_cnt[j]++;
-                if (white_cnt[j] >= 2 && black_cnt[j] >= 2) {
-                    tile_color[j] = 3;
-                } else {
-                    tile_color[j] = 1; // 흰색
-                }
+                t.w++;
+                if (t.w >= 2 && t.b >= 2) t.color = 3;
+                else t.color = 1;
             }
-            cur = target; // 마지막 위치에 서기
+            cur = target;
         } else {
-            // 오른쪽으로 이동하며 x칸 칠하기
             int target = cur + x - 1;
             for (int j = cur; j <= target; j++) {
-                if (tile_color[j] == 3) continue;
+                auto& t = board[j];
+                if (t.color == 3) continue;
 
-                black_cnt[j]++;
-                if (white_cnt[j] >= 2 && black_cnt[j] >= 2) {
-                    tile_color[j] = 3;
-                } else {
-                    tile_color[j] = 2; // 검은색
-                }
+                t.b++;
+                if (t.w >= 2 && t.b >= 2) t.color = 3;
+                else t.color = 2;
             }
             cur = target;
         }
     }
 
-    int w = 0, b = 0, g = 0;
-    for (int i = 0; i < MAX; i++) {
-        if (tile_color[i] == 1) w++;
-        else if (tile_color[i] == 2) b++;
-        else if (tile_color[i] == 3) g++;
+    int w_ans = 0, b_ans = 0, g_ans = 0;
+    for (auto const& [pos, t] : board) {
+        if (t.color == 1) w_ans++;
+        else if (t.color == 2) b_ans++;
+        else if (t.color == 3) g_ans++;
     }
 
-    cout << w << " " << b << " " << g << "\n";
+    cout << w_ans << " " << b_ans << " " << g_ans << "\n";
 
     return 0;
 }
