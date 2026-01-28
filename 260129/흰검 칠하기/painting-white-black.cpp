@@ -1,74 +1,69 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <set>
 
 using namespace std;
 
-// 지점의 변화(이벤트)를 저장
-struct Event {
-    int pos;
-    int type; // 1: 시작, -1: 끝
-    char color;
-    int id;   // 명령의 순서 (마지막 색깔 확인용)
-};
+// 최대 이동 거리를 고려해 배열 크기 설정 (N=1000, x=100 기준 넉넉히 20만)
+const int MAX = 200005;
+const int OFFSET = 100000;
+
+int white_cnt[MAX]; // 흰색으로 칠해진 횟수
+int black_cnt[MAX]; // 검은색으로 칠해진 횟수
+int tile_color[MAX]; // 0: 없음, 1: 흰색, 2: 검은색, 3: 회색
 
 int main() {
-    ios::sync_with_stdio(false);
+    ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
     int n;
     cin >> n;
 
-    vector<Event> events;
-    int cur = 0;
+    int cur = OFFSET;
+
     for (int i = 0; i < n; i++) {
-        int dist; char dir;
-        cin >> dist >> dir;
-        int l, r;
-        if (dir == 'L') { l = cur - dist; r = cur; cur -= dist; }
-        else { l = cur; r = cur + dist; cur += dist; }
-        
-        events.push_back({l, 1, (dir == 'L' ? 'W' : 'B'), i});
-        events.push_back({r, -1, (dir == 'L' ? 'W' : 'B'), i});
-    }
+        int x;
+        char dir;
+        cin >> x >> dir;
 
-    // 좌표 순으로 정렬
-    sort(events.begin(), events.end(), [](const Event& a, const Event& b) {
-        return a.pos < b.pos;
-    });
+        if (dir == 'L') {
+            // 왼쪽으로 이동하며 x칸 칠하기
+            int target = cur - x + 1;
+            for (int j = cur; j >= target; j--) {
+                if (tile_color[j] == 3) continue; // 이미 회색이면 패스
 
-    int white_ans = 0, black_ans = 0, gray_ans = 0;
-    int w_cnt = 0, b_cnt = 0;
-    set<pair<int, char>> active_segments; // {id, color} 현재 겹쳐있는 구간들
-
-    for (size_t i = 0; i < events.size() - 1; i++) {
-        // 현재 위치에서 이벤트 처리
-        if (events[i].type == 1) {
-            if (events[i].color == 'W') w_cnt++; else b_cnt++;
-            active_segments.insert({events[i].id, events[i].color});
+                white_cnt[j]++;
+                if (white_cnt[j] >= 2 && black_cnt[j] >= 2) {
+                    tile_color[j] = 3;
+                } else {
+                    tile_color[j] = 1; // 흰색
+                }
+            }
+            cur = target; // 마지막 위치에 서기
         } else {
-            if (events[i].color == 'W') w_cnt--; else b_cnt--;
-            // id를 찾아 제거 (C++17에서는 erase(iterator) 등으로 깔끔하게 처리)
-            active_segments.erase({events[i].id, events[i].color});
-        }
+            // 오른쪽으로 이동하며 x칸 칠하기
+            int target = cur + x - 1;
+            for (int j = cur; j <= target; j++) {
+                if (tile_color[j] == 3) continue;
 
-        // 다음 좌표까지의 구간 길이
-        int len = events[i + 1].pos - events[i].pos;
-        if (len == 0) continue;
-
-        // 구간 성질 판단
-        if (w_cnt >= 2 && b_cnt >= 2) {
-            gray_ans += len;
-        } else if (!active_segments.empty()) {
-            // 마지막으로 추가된(id가 가장 큰) 구간의 색깔 확인
-            char last_c = active_segments.rbegin()->second;
-            if (last_c == 'W') white_ans += len;
-            else black_ans += len;
+                black_cnt[j]++;
+                if (white_cnt[j] >= 2 && black_cnt[j] >= 2) {
+                    tile_color[j] = 3;
+                } else {
+                    tile_color[j] = 2; // 검은색
+                }
+            }
+            cur = target;
         }
     }
 
-    cout << white_ans << " " << black_ans << " " << gray_ans << "\n";
+    int w = 0, b = 0, g = 0;
+    for (int i = 0; i < MAX; i++) {
+        if (tile_color[i] == 1) w++;
+        else if (tile_color[i] == 2) b++;
+        else if (tile_color[i] == 3) g++;
+    }
+
+    cout << w << " " << b << " " << g << "\n";
 
     return 0;
 }
