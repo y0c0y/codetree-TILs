@@ -14,7 +14,7 @@ int main() {
     cin >> xF[0] >> yF[0] >> xS[0] >> yS[0];
     cin >> xF[1] >> yF[1] >> xS[1] >> yS[1];
 
-    for(int y = yF[0]; y < yS[0];y++)
+    for(int y = yF[0]; y < yS[0]; y++)
     {
         for(int x = xF[0]; x < xS[0]; x++)
         {
@@ -26,7 +26,7 @@ int main() {
     {
         for(int x = xF[1]; x < xS[1]; x++)
         {
-            arr[y+OFFSET][x+OFFSET] = -1;
+            arr[y+OFFSET][x+OFFSET]--;
         }
     }
 
@@ -49,9 +49,18 @@ int main() {
         }
     }
 
-    int result = (maxY-minY + 1)*(maxX-minX+1);
+    int cnt = 0;
+    // cout<<maxY<<' '<< maxX<<' '<<minY<<' '<<minX<<'\n';
 
-    cout << result;
+    for(int y = minY; y <= maxY; y++)
+    {
+        for(int x = minX; x <= maxX; x++)
+        {
+            cnt++;
+        }
+    }
+
+    cout << cnt;
 
     // Please write your code here.
 
