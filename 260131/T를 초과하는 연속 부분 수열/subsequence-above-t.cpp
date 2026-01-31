@@ -13,16 +13,16 @@ int main() {
     int  cnt  = 0;
     int maxCnt = numeric_limits<int>::min();
 
-    for(int i=0;i<n -1;i++)
+    for(int i=0;i<n;i++)
     {
-        if( t < arr[i])cnt++;
+        if( t < arr[i]) cnt++;
         else
         { 
-            if(cnt>maxCnt) maxCnt = cnt;
+            if(cnt > maxCnt) maxCnt = cnt;
             cnt = 0;
         }
     }
-    if(cnt>maxCnt) maxCnt =cnt;
+    if(cnt>maxCnt) maxCnt = cnt;
 
     cout << maxCnt;
 
