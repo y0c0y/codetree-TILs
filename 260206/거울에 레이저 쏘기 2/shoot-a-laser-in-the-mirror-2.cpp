@@ -17,16 +17,27 @@ int Reflect(char ch, int d)
 
     bool flag = false;
 
-    if (isHorizontal && !isSlash || !isHorizontal && isSlash)
-    {
-        flag = true;
-    }
-
-    if (flag) // ClockWise
+    if (isHorizontal && !isSlash)
     {
         d = (d + 1) % 4;
     }
-    else // 'Back Slash'
+    else if(isHorizontal && !isSlash)
+    {
+        d = (d - 1 + 4) % 4;
+    }
+    else if(isHorizontal && !isSlash)
+    {
+        d = (d - 1 + 4) % 4;
+    }
+    else if(isHorizontal && !isSlash)
+    {
+        d = (d - 1 + 4) % 4;
+    }
+    else if(isHorizontal && !isSlash)
+    {
+        d = (d - 1 + 4) % 4;
+    }
+    else if(isHorizontal && !isSlash)
     {
         d = (d - 1 + 4) % 4;
     }
@@ -39,8 +50,6 @@ tuple<int, int, int> FindStartInfo()
     int dir = 0;
     int y = 0;
     int x = 0;
-
-
 
     if (k <= n)
     {
@@ -99,12 +108,12 @@ int main() {
 
         y += dy[dir];
         x += dx[dir];
-        cnt++;
 
         if (!InRange(y, x))
         {
             break;
         }
+        cnt++;
 
         dir = Reflect(grid[y][x], dir);
     }
