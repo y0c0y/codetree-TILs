@@ -11,27 +11,25 @@ int dx[4] = { 0,-1,0,1 }; //SWNE
 
 int Reflect(char ch, int d)
 {
-
     bool isHorizontal = (d % 2 == 0);
     bool isSlash = (ch == '/');
 
     bool flag = false;
 
-    if (isHorizontal && !isSlash || !isHorizontal && isSlash)
-    {
-        flag = true;
-    }
+    if (isHorizontal && !isSlash || !isHorizontal && isSlash) flag = false;
+    else flag = true;
 
-    if (isHorizontal && !isSlash)
+    if (flag)
     {
         d = (d + 1) % 4;
     }
-    else // 'Back Slash'
+    else
     {
         d = (d - 1 + 4) % 4;
     }
 
     return d;
+
 }
 
 tuple<int, int, int> FindStartInfo()
@@ -40,14 +38,29 @@ tuple<int, int, int> FindStartInfo()
     int y = 0;
     int x = 0;
 
-    if (k <= n) { 
-        dir = 0; y = 0; x = k - 1; 
-    } else if (k <= 2 * n) { 
-        dir = 1; y = k - n - 1; x = n - 1; 
-    } else if (k <= 3 * n) { 
-        dir = 2; y = n - 1; x = 3 * n - k; 
-    } else { 
-        dir = 3; y = 4 * n - k; x = 0; 
+    if (k <= n)
+    {
+        dir = 0;
+        y = 0;
+        x = (k - 1) % n;
+    }
+    else if (k <= 2 * n)
+    {
+        dir = 1;
+        y = (k - 1) % n;
+        x = n-1;
+    }
+    else if (k <= 3 * n)
+    {
+        dir = 2;
+        y = n-1;
+        x = n - 1 - ((k - 1) % n);
+    }
+    else
+    {
+        dir = 3;
+        y = n - 1 - ((k - 1) % n);
+        x = 0;
     }
 
     return make_tuple(dir, y, x);
@@ -78,9 +91,11 @@ int main() {
 
     while (InRange(y, x))
     {
-        //cout << dir << ' ' << y << ' ' << x << '\n';
-        dir = Reflect(grid[y][x], dir);
+        // cout << dir << ' ' << y << ' ' << x << '\n';
+
         cnt++;
+
+        dir = Reflect(grid[y][x], dir);
         y += dy[dir];
         x += dx[dir];
     }
