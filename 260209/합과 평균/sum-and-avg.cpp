@@ -7,7 +7,10 @@ int main() {
 
     int a,b;
     cin >> a >> b;
-    cout << (a+b) << ' ';
-    cout << floor((a+b)*10.0/20);
+
+    int tmp = a+b;
+
+    cout << tmp << ' ';
+    cout << floor((tmp)*10.0)/20;
     return 0;
 }
