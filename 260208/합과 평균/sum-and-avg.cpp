@@ -7,6 +7,6 @@ int main() {
     int a,b;
     cin >> a >> b;
     cout << (a+b) << ' ';
-    cout << (a+b)/2.0;
+    cout << (a+b)*1.0/2.0;
     return 0;
 }
