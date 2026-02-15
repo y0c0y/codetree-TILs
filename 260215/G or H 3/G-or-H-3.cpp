@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int limits = 101;
+const int limits = 10001;
 int N, K;
 int x[100];
 char c[100];
@@ -21,7 +21,7 @@ int main() {
     int total = 0;
     int maxVal =  INT_MIN;
 
-    for (int i = 1; i < limits - K + 1; i++) 
+    for (int i = 1; i <= limits - K + 1; i++) 
     {
         total = 0;
 
@@ -31,7 +31,6 @@ int main() {
         }
 
         maxVal = max(maxVal, total);
-        
     }
 
     cout << maxVal;
