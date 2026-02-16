@@ -4,14 +4,6 @@ using namespace std;
 
 int n;
 int arr[100];
-vector<int> vec;
-
-
-int solution(int start, int end)
-{
-    int sum = accumulate(vec.begin() + start, vec.begin()+end, 0);
-    return sum/(end-start);
-}
 
 int main() {
     cin >> n;
@@ -19,20 +11,28 @@ int main() {
         cin >> arr[i];
     }
 
-    vec.assign(arr, arr+n);
-
-    int tmp = 0;
+    double tmp = 0;
     int cnt = 0;
 
     for (int i = 0; i < n; i++) 
     {
         for (int j = i; j < n; j++) 
         {
-            tmp = solution(i, j);
-
-            if(find(vec.begin()+i, vec.begin()+j, tmp) != vec.begin()+j)
+            
+            if(i == j) cnt++;
+            else
             {
-                cnt++;
+                tmp = accumulate(arr + i, arr + j + 1, 0);
+
+                tmp /= (j - i);
+
+                // cout << tmp << '\n';
+
+                if(find(arr + i, arr+j + 1, tmp) != arr+j + 1)
+                {
+                    cnt++;
+                }
+
             }
 
         }
