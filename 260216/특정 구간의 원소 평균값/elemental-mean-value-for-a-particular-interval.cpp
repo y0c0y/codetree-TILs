@@ -14,25 +14,23 @@ int main() {
     double tmp = 0;
     int cnt = 0;
 
+    vector<int> v;
+
     for (int i = 0; i < n; i++) 
     {
         for (int j = i; j < n; j++) 
         {
+
+            v.assign(arr + i, arr + j + 1);
             
-            if(i == j) cnt++;
-            else
+            tmp = accumulate(v.begin(), v.end(), 0);
+            tmp /= v.size();
+
+            // cout << v.size() << ' ' << tmp << '\n';
+
+            if(find(v.begin(), v.end(), tmp) != v.end())
             {
-                tmp = accumulate(arr + i, arr + j + 1, 0);
-
-                tmp /= (j - i);
-
-                // cout << tmp << '\n';
-
-                if(find(arr + i, arr+j + 1, tmp) != arr+j + 1)
-                {
-                    cnt++;
-                }
-
+                cnt++;
             }
 
         }
