@@ -14,7 +14,7 @@ int main() {
 
     long long minGap = LLONG_MAX;
 
-    long long total = accumulate(arr, arr + N, 0);
+    long long total = accumulate(arr, arr + N + 1, 0);
 
     long long score[3];
 
@@ -22,14 +22,17 @@ int main() {
 
     for(int i = 0; i < N; i ++)
     {
-        for(int j = i + 1; j < N; j++)
+        score[0] = arr[i];
+
+        for(int j = 0; j < N; j++)
         {
+            if(j == i) continue;
 
-            score[0] = arr[i] + arr[j];
-
-            for(int k = j + 1; k < N; k++)
+            for(int k = 0; k < N; k++)
             {
-                score[1] = arr[k];
+                if(k == i || k == j) continue;
+
+                score[1] = arr[j] + arr[k];
 
                 score[2] = total - (score[0] + score[1]);
 
@@ -43,6 +46,8 @@ int main() {
                 maxVal = max({score[0], score[1], score[2]});
 
                 minGap = min(minGap, maxVal - minVal);
+
+                // cout << score[0] << ' ' << score[1] << ' ' << score[2] << ' ' << minGap << '\n';
             }
         }
     }
