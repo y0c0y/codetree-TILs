@@ -1,62 +1,33 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
 int N;
-int x[100];
-int y[100];
+int x[100], y[100];
 
 int main() {
+    ios::sync_with_stdio(0); cin.tie(0); // 입출력 속도 향상
+    
     cin >> N;
-
     for (int i = 0; i < N; i++) {
         cin >> x[i] >> y[i];
     }
 
-    int maxVal = INT_MIN;
+    int maxArea2 = 0; // 2 * Area (정수 계산을 위해)
 
-    int space = 0;
-
-    for (int i = 0; i < N - 2; i++) {
-        for (int j = i+1; j < N - 1; j++) {
-        for (int k = j + 1; k < N; k++) {
-       if(y[i] == y[j] && x[k] == x[j])
-       {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j]);
-       }
-       else if(y[k] == y[j] && x[i] == x[j])
-       {
-            space = abs(x[k] - x[j]) * abs(y[i] - y[j]);
-       }
-       else if(y[i] == y[j] && x[k] == x[i])
-       {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[i]);
-       }
-       else if(y[i] == y[k] && x[i] == x[j])
-       {
-            space = abs(x[i] - x[k]) * abs(y[i] - y[j]);
-       }
-       else if(y[i] == y[k] && x[k] == x[j])
-       {
-            space = abs(x[i] - x[k]) * abs(y[k] - y[j]);
-       }
-       else if(y[k] == y[j] && x[k] == x[i])
-       {
-            space = abs(x[k] - x[j]) * abs(y[k] - y[i]);
-       }
-       else 
-       {
-            space = 0;
-       }
-
-       maxVal = max(maxVal, space);
-    }
-    }
+    // 세 점 i, j, k를 선택
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            for (int k = 0; k < N; k++) {
+                // i를 직각의 정점으로 가정: (i, j)가 수직, (i, k)가 수평
+                // 즉, x[i] == x[j] 이고 y[i] == y[k] 인 경우
+                if (x[i] == x[j] && y[i] == y[k]) {
+                    int area2 = abs(y[i] - y[j]) * abs(x[i] - x[k]);
+                    maxArea2 = max(maxArea2, area2);
+                }
+            }
+        }
     }
 
-    cout << maxVal;
-
-    // Please write your code here.
-
+    cout << maxArea2;
     return 0;
 }
