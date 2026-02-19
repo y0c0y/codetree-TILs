@@ -22,39 +22,39 @@ int main() {
         for (int k = j + 1; k < N; k++) {
        if(y[i] == y[j] && x[k] == x[j])
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = abs(x[i] - x[j]) * abs(y[k] - y[j]);
        }
-       else if(y[i] == y[j] && x[k] == x[j])
+       else if(y[k] == y[j] && x[i] == x[j])
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = abs(x[k] - x[j]) * abs(y[i] - y[j]);
        }
-       else if(y[i] == y[j] && x[k] == x[j])
+       else if(y[i] == y[j] && x[k] == x[i])
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = abs(x[i] - x[j]) * abs(y[k] - y[i]);
        }
-       else if(y[i] == y[j] && x[k] == x[j])
+       else if(y[i] == y[k] && x[i] == x[j])
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = abs(x[i] - x[k]) * abs(y[i] - y[j]);
        }
-       else if(y[i] == y[j] && x[k] == x[j])
+       else if(y[i] == y[k] && x[k] == x[j])
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = abs(x[i] - x[k]) * abs(y[k] - y[j]);
        }
-       else if(y[i] == y[j] && x[k] == x[j])
+       else if(y[k] == y[j] && x[k] == x[i])
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = abs(x[k] - x[j]) * abs(y[k] - y[i]);
        }
-       else if(y[i] == y[j] && x[k] == x[j])
+       else 
        {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
+            space = 0;
        }
-       else if(y[i] == y[j] && x[k] == x[j])
-       {
-            space = abs(x[i] - x[j]) * abs(y[k] - y[j])
-       }
+
+       maxVal = max(maxVal, space);
     }
     }
     }
+
+    cout << maxVal;
 
     // Please write your code here.
 
