@@ -12,7 +12,7 @@ int main() {
     }
 
 
-    const int ori = 2 * m;
+    const int ori = 2 * m + 1;
     
     bool flag = false;
     int cnt = ori;
@@ -25,22 +25,19 @@ int main() {
 
         if(flag)
         {
-             if(cnt == 0)
-            {
-                // cout << i << ' ' << result << '\n';
-                result++;
-                cnt = ori;
-                flag = false;
-            }
-            else
-            {
-                cnt--;
-            }
-            
+            cnt--;
         }
 
-       
+        if(cnt == 0)
+        {
+            // cout << i << ' ' << result << '\n';
+            result++;
+            cnt = ori;
+            flag = false;
+        }
     }
+
+    if(result ==0) result++;
 
     cout << result;
 
