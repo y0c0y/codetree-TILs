@@ -19,7 +19,9 @@ int main() {
 
     int result = 0;
 
-    for (int i = 0; i < n; i++)
+    if(2 * m + 1 >= n) result ++;
+    else{
+for (int i = 0; i < n; i++)
     {      
         if(arr[i]) flag = true;
 
@@ -31,13 +33,17 @@ int main() {
         if(cnt == 0)
         {
             // cout << i << ' ' << result << '\n';
-
             i+= ori - 1;
             result++;
             cnt = ori;
             flag = false;
         }
     }
+    }
+
+    
+
+
 
     cout << result;
 
