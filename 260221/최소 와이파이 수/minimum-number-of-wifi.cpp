@@ -12,7 +12,7 @@ int main() {
     }
 
 
-    const int ori = m + 1;
+    const int ori = m;
     
     bool flag = false;
     int cnt = 0;
@@ -23,21 +23,25 @@ int main() {
 
     while(i < n)
     {
-        if(cnt == 0)
-        {
-            cnt = ori;
-            flag = false;
-            result ++;
-            i+= ori;
-        }
-        else
-        {
-            i++;
-        }
-
         if(arr[i]) flag = true;
 
-        if(flag) cnt--;
+        if(flag) 
+        {
+            if(cnt == 0)
+            {
+                cnt = ori;
+                flag = false;
+                result++;
+                i+= ori;
+            }
+            else
+            {
+                cnt--;
+            }
+        }
+        
+        i++;
+        
     }
   
     cout << result;
