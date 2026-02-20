@@ -13,8 +13,7 @@ int main() {
 
     // Please write your code here.
 
-    if(n  % (2*m +1) != 0 ) cout << n /(2*m+1) + 1;
-    else cout << n /(2*m+1);
+cout << n /(2*m+1);
 
     return 0;
 }
