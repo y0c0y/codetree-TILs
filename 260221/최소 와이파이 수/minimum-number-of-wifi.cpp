@@ -19,29 +19,15 @@ int main() {
 
     int result = 0;
 
-    int i = 0;
-
-    while(i < n)
+    for(int i = 0; i < n ; i++)
     {
-        if(arr[i]) flag = true;
+        // cout << i << ' ' << result << ' ' << cnt << '\n';
 
-        if(flag) 
+        if(arr[i]) 
         {
-            if(cnt == 0)
-            {
-                cnt = ori;
-                flag = false;
-                result++;
-                i+= ori;
-            }
-            else
-            {
-                cnt--;
-            }
+            result++;
+            i += 2 * m;
         }
-        
-        i++;
-        
     }
   
     cout << result;
