@@ -23,15 +23,23 @@ int main() {
     {      
         if(arr[i]) flag = true;
 
-        if(flag) cnt--;
-
-        if(cnt == 0)
+        if(flag)
         {
-            // cout << i << ' ' << result << '\n';
-            result++;
-            cnt = ori;
-            flag = false;
+             if(cnt == 0)
+            {
+                // cout << i << ' ' << result << '\n';
+                result++;
+                cnt = ori;
+                flag = false;
+            }
+            else
+            {
+                cnt--;
+            }
+            
         }
+
+       
     }
 
     cout << result;
