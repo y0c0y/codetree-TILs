@@ -15,36 +15,31 @@ int main() {
     const int ori = m + 1;
     
     bool flag = false;
-    int cnt = ori;
+    int cnt = 0;
 
     int result = 0;
 
-    if(2 * m + 1 >= n) result ++;
-    else{
-for (int i = 0; i < n; i++)
-    {      
-        if(arr[i]) flag = true;
+    int i = 0;
 
-        if(flag)
-        {
-            cnt--;
-        }
-
+    while(i < n)
+    {
         if(cnt == 0)
         {
-            // cout << i << ' ' << result << '\n';
-            i+= ori - 1;
-            result++;
             cnt = ori;
             flag = false;
+            result ++;
+            i+= ori;
         }
+        else
+        {
+            i++;
+        }
+
+        if(arr[i]) flag = true;
+
+        if(flag) cnt--;
     }
-    }
-
-    
-
-
-
+  
     cout << result;
 
     return 0;
