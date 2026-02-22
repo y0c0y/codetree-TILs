@@ -50,11 +50,11 @@ int main() {
         cin >> P[i] >> S[i];
     }
 
-    for (int i = 0; i < N; i++) {
-            for (int i = 0; i < N; i++) {
-            cin >> P[i] >> S[i];
-        }
-    }
+    // for (int i = 0; i < N; i++) {
+    //         for (int i = 0; i < N; i++) {
+    //         cin >> P[i] >> S[i];
+    //     }
+    // }
 
     cout << fun(0, 0, false, 0);
 
