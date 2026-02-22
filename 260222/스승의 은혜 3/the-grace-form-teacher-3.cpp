@@ -6,6 +6,22 @@ int N, B;
 int P[1000];
 int S[1000];
 
+bool cmp(const pair<int, int>& a, const pair<int, int>& b)
+{
+    int fa,sa, fb, sb;
+
+    tie(fa, sa) = a;
+    tie(fb, sb) = b;
+
+    if(fa + sa != fb + sb) return fa + sa < fb + sb;
+    else
+    {
+        if(sa != sb) return sa < sb;
+        else return fa <= fb;
+    }
+    
+}
+
 
 int main() {
     cin >> N >> B;
@@ -30,29 +46,38 @@ int main() {
     int price = 0;
     int ship = 0;
 
+    // for (int i = 0; i < N; i++) {
+    
+    //     tie(price, ship) = students[i];
+
+    //     cout << price << ' ' << ship << '\n';
+        
+    // }
+
     for (int i = 0; i < N; i++) {
         total = 0;
         cnt = 0;
 
         tie(price, ship) = students[i];
 
-        total +=price/2 + ship;
+        total += price/2 + ship;
 
         if(total <= B)
         {
             cnt++;
+
             for (int j = 0; j < N; j++) {
                 if(i == j) continue;
+
                 tie(price, ship) = students[j];
-                 total += price + ship;
+                total += price + ship;
+
                 if(total <= B) cnt++;
                 else break;
             }
         }
 
         maxVal = max(maxVal, cnt);
-
-
         
     }
 
