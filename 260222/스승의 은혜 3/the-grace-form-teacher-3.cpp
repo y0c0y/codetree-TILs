@@ -12,25 +12,39 @@ int main() {
 
     int maxVal = INT_MIN;
 
+    vector<pair<int,int>> students;
+    pair<int,int> tmp;
+
     for (int i = 0; i < N; i++) {
         cin >> P[i] >> S[i];
+
+        tmp = make_pair(P[i], S[i]);
+        students.push_back(tmp);
     }
+
+    sort(students.begin(), students.end());
 
     int total = 0;
     int cnt = 0;
+
+    int price = 0;
+    int ship = 0;
 
     for (int i = 0; i < N; i++) {
         total = 0;
         cnt = 0;
 
-        total += P[i]/2 + S[i];
+        tie(price, ship) = students[i];
+
+        total +=price/2 + ship;
 
         if(total <= B)
         {
             cnt++;
             for (int j = 0; j < N; j++) {
                 if(i == j) continue;
-                total += P[j] + S[j];
+                tie(price, ship) = students[j];
+                 total += price + ship;
                 if(total <= B) cnt++;
                 else break;
             }
