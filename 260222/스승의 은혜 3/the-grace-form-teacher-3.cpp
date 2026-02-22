@@ -38,7 +38,7 @@ int main() {
         students.push_back(tmp);
     }
 
-    sort(students.begin(), students.end());
+    sort(students.begin(), students.end(), cmp);
 
     int total = 0;
     int cnt = 0;
