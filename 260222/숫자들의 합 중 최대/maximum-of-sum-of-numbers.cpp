@@ -9,20 +9,18 @@ int main() {
 
     int maxVal = INT_MIN;
 
-    string tmp;
-    int len = 0;
     int total = 0;
+    int tmp = 0;
 
     for(int i = X; i <= Y; i++)
     {
         total = 0;
+        tmp = i;
 
-        tmp = to_string(i);
-        len = tmp.length();
-
-        for(int j = 0; j < len; j++)
+        while(tmp > 0)
         {
-            total += tmp[j] - '0';
+            total += tmp % 10;
+            tmp /= 10;
         }
 
         maxVal = max(total, maxVal);
