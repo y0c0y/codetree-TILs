@@ -57,7 +57,7 @@ int main() {
 
     int temp = 0;
 
-    for(int i = minT; i <= maxT; i++)
+    for(int i = minT - 1; i <= maxT + 1; i++)
     {
         total = 0;
 
