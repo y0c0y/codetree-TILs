@@ -39,11 +39,11 @@ int main() {
        if(score > maxScore)
        {
             maxScore = score;
-            idx = j;
+            // idx = j;
        }
     }
 
-    cout << idx;
+    cout << maxScore;
 
     // Please write your code here.
 
