@@ -20,32 +20,32 @@ int main() {
     int score = 0;
     int idx = 0;
 
-    for(int j = 0 ; j <3 ; j++)
+    for(int j = 1 ; j <=3 ; j++)
     {   
         int info[3] = {0,0,0};
 
-        info[j] = 1;
+        info[j - 1] = 1;
 
         score = 0;
 
         for (int i = 0; i < N; i++) 
         {
            swap(info[a[i] - 1],info[b[i] - 1]);
-            if(info[c[i] - 1]) score++;
+           if(info[c[i] - 1]) score++;
         }
 
-       if(score >= maxScore)
+        // cout << score <<'\n';
+
+       if(score > maxScore)
        {
             maxScore = score;
             idx = j;
        }
     }
 
-    cout << idx + 1;
+    cout << idx;
 
     // Please write your code here.
-
-
 
     return 0;
 }
