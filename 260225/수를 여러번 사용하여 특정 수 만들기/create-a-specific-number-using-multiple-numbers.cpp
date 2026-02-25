@@ -14,13 +14,13 @@ int main() {
 
     int maxVal = INT_MIN;
 
-    for(int i = 0; i < a ; i++)
+    for(int i = 0; i <= a ; i++)
     {
         total = 0;
 
         total += A * i;
 
-        for(int j = 0; j < b; j++)
+        for(int j = 0; j <= b; j++)
         {
             total += B;
             if(total > C)
