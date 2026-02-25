@@ -10,7 +10,6 @@ int main() {
 
     ios::sync_with_stdio(false);
     cin.tie(0);
-    cout.tie(0);
 
     cin >> n;
 
@@ -20,8 +19,6 @@ int main() {
     {
         cin >> arr[i];
     }
-
-
 
     int min_diff = INT_MAX;
     for(int i = 0; i < n; i++) {
