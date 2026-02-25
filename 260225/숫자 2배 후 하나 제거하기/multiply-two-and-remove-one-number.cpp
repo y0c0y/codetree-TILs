@@ -25,7 +25,7 @@ int main() {
         arr[i] *= 2;
     
         for(int j = 0; j < n; j++) {
-            int remaining_arr[4] = {};
+            int remaining_arr[n-1] = {};
             int cnt = 0;
             for(int k = 0; k < n; k++)
                 if(k != j)
