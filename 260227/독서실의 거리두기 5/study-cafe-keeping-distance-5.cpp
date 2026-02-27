@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 int N;
@@ -9,78 +10,47 @@ int main() {
     cin >> seat;
 
     int maxVal = INT_MIN;
-    int cnt = 0;
 
-    for(int i = 0; i < N; i ++)
+    for(int i = 0; i < N; i++)
     {
-        if(seat[i] != '0' ) continue;
+        
 
-        if((i == 0 && seat[i + 1] == '0'))
+        if(seat[i] == '0')
         {
+            int minVal = INT_MAX;
+
             seat[i]++;
-            cnt = 0;
 
-            // cout << seat << '\n';
+            vector<int> idx;
 
-            for(int j = i + 1; j < N; j ++)
-            {
-                if(seat[j] == '1') break;
-                else cnt++;
-            }
-            seat[i]--;
-        }
-        else if((i == N - 1 && seat[i - 1] == '0'))
-        {
-            seat[i]++;
-            cnt = 0;
-
-            // cout << seat << '\n';
-
-            for(int j = i - 1; j >= 0; j --)
-            {
-                if(seat[j] == '1') break;
-                else cnt++;
-                
-            }
-            seat[i]--;
-        }
-        else if((seat[i - 1] == '0' && seat[i + 1] == '0'))
-        {
-            seat[i]++;
-            cnt = 0;
-
-            // cout << seat << '\n';
-
-            for(int j = i - 1; j >= 0; j --)
+            for(int j = 0; j < N; j++)
             {
                 if(seat[j] == '1')
                 {
-                    break;
+                    idx.push_back(j);
                 }
-                else cnt++;
-                
             }
 
-            int check = cnt;
+            int cnt = idx.size();
 
-            for(int j = i + 1; j < N; j ++)
+            for(int j = 1; j < cnt; j++)
             {
-                if(seat[j] == '1')
-                {
-                    break;
-                }
-                else check--;
+                int tmp = idx[j] - idx[j - 1];
+                // cout << tmp<< ' ' << minVal << '\n';
+                minVal = min(minVal, tmp);
             }
-
-            if(check != 0) cnt = 0;
 
             seat[i]--;
+
+            // cout << maxVal<< ' ' << minVal << '\n';
+
+            maxVal = max(maxVal, minVal);
         }
 
-        maxVal = max(cnt, maxVal);
+       
     }
 
-    cout << maxVal + 1;
+    cout << maxVal;
 
     return 0;
 }
