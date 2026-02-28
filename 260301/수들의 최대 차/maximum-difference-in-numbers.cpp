@@ -5,6 +5,24 @@ using namespace std;
 int N, K;
 int arr[1000];
 
+class Info{
+
+public:
+    int val;
+    int start;
+    int cnt;
+
+    Info () {};
+
+    Info(int v, int s, int c)
+    {
+        this->val = v;
+        this-> start = s;
+        this->cnt = c;
+    }
+
+};
+
 int main() {
     cin >> N >> K;
 
@@ -14,34 +32,44 @@ int main() {
 
     sort(arr, arr + N);
 
-    vector<pair<int,int>> info;
+    vector<Info> info;
 
     int idx = 0;
+    int start = 0;
+    int cnt = 0;
     int val = arr[idx];
-    info.push_back(make_pair(val,idx));
+
+    bool flag = false;
 
     for(; idx< N; idx++)
     {
         if(val != arr[idx])
         {
+
+            Info tmp = Info(val, start, idx - start);
             val = arr[idx];
-            info.push_back(make_pair(val,idx));
+            start = idx;
+            info.push_back(tmp);
+            flag = false;
         }
+        else flag = true;
     }
+
+    if(flag) info.push_back(Info(val, start, N - start));
 
     int len = info.size();
 
     int maxVal = INT_MIN;
-    int cnt = 0;
 
     for (int i = 0; i < len; i++) {
 
-        cnt = 0;
-        tie(val,idx) = info[i];
+        
+        val = info[i].val;
+        cnt = info[i].cnt;
 
-        for(int j = idx; j < N; j++)
+        for(int j = i + 1; j < len; j++)
         {
-            if(arr[j] - val <=  K) cnt++;
+            if(info[j].val - val <=  K) cnt+= info[j].cnt;
             else break;
         }
 
