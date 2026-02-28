@@ -12,21 +12,19 @@ int main() {
         cin >> arr[i];
     }
 
-    vector<int> brr(arr, arr + N);
-
-    sort(brr.begin(), brr.end());
+    sort(arr, arr + N);
 
     vector<pair<int,int>> info;
 
     int idx = 0;
-    int val = brr[idx];
+    int val = arr[idx];
     info.push_back(make_pair(val,idx));
 
     for(; idx< N; idx++)
     {
-        if(val != brr[idx])
+        if(val != arr[idx])
         {
-            val = brr[idx];
+            val = arr[idx];
             info.push_back(make_pair(val,idx));
         }
     }
@@ -43,7 +41,7 @@ int main() {
 
         for(int j = idx; j < N; j++)
         {
-            if(brr[j] - val <=  K) cnt++;
+            if(arr[j] - val <=  K) cnt++;
             else break;
         }
 
