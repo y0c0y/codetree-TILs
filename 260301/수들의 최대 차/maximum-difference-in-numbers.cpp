@@ -1,85 +1,28 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int N, K;
-int arr[1000];
-
-class Info{
-
-public:
-    int val;
-    int start;
-    int cnt;
-
-    Info () {};
-
-    Info(int v, int s, int c)
-    {
-        this->val = v;
-        this-> start = s;
-        this->cnt = c;
-    }
-
-};
-
 int main() {
-    cin >> N >> K;
+    int N, K;
+    if (!(cin >> N >> K)) return 0;
 
-    for (int i = 0; i < N; i++) {
-        cin >> arr[i];
-    }
+    vector<int> arr(N);
+    for (int i = 0; i < N; i++) cin >> arr[i];
 
-    sort(arr, arr + N);
+    sort(arr.begin(), arr.end());
 
-    vector<Info> info;
+    int maxVal = 0;
+    int right = 0;
 
-    int idx = 0;
-    int start = 0;
-    int cnt = 0;
-    int val = arr[idx];
-
-    bool flag = false;
-
-    for(; idx< N; idx++)
-    {
-        if(val != arr[idx])
-        {
-
-            Info tmp = Info(val, start, idx - start);
-            val = arr[idx];
-            start = idx;
-            info.push_back(tmp);
-            flag = false;
+    // 투 포인터 활용: O(N)
+    for (int left = 0; left < N; left++) {
+        // 현재 범위 [left, right]의 차이가 K 이하인 동안 right를 확장
+        while (right < N && arr[right] - arr[left] <= K) {
+            right++;
         }
-        else flag = true;
+        // 개수는 right - left
+        maxVal = max(maxVal, right - left);
     }
 
-    if(flag) info.push_back(Info(val, start, N - start));
-
-    int len = info.size();
-
-    int maxVal = INT_MIN;
-
-    for (int i = 0; i < len; i++) {
-
-        
-        val = info[i].val;
-        cnt = info[i].cnt;
-
-        for(int j = i + 1; j < len; j++)
-        {
-            if(info[j].val - val <=  K) cnt+= info[j].cnt;
-            else break;
-        }
-
-        maxVal = max(maxVal, cnt);
-        
-    }
-
-    cout<< maxVal;
-
-    
-
+    cout << maxVal;
     return 0;
 }
