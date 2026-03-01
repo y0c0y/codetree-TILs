@@ -1,36 +1,44 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
+
+long long solve_min_time(long long X) {
+    // 1. 이동 거리가 0인 경우 0초 반환
+    if (X == 0) return 0;
+
+    // 2. 피라미드의 정점(최대 속도) V 찾기
+    // V^2 <= X 를 만족하는 최대 정수 V
+    long long V = static_cast<long long>(sqrt(X));
+
+    // 3. 기본 피라미드 구성 시 걸리는 시간 (1, 2, ..., V, ..., 2, 1)
+    // 개수는 (2 * V - 1)개
+    long long time = 2 * V - 1;
+
+    // 4. 남은 거리 계산
+    long long remaining_distance = X - (V * V);
+
+    // 5. 남은 거리를 기존 속도 구간에 끼워 넣기 (그리디)
+    // 남은 거리가 있을 때까지 속도 V 또는 그 이하의 속도를 유지하는 시간을 추가
+    while (remaining_distance > 0) {
+        if (remaining_distance >= V) {
+            remaining_distance -= V;
+        } else {
+            // 남은 거리가 V보다 작으면 어떤 속도(1~V-1)든 하나를 골라 
+            // 1초 더 유지하면 되므로 거리를 0으로 만들고 루프 종료
+            remaining_distance = 0;
+        }
+        time++;
+    }
+
+    return time;
+}
 
 int main() {
     long long X; // 거리가 클 수 있으므로 long long 권장
     cin >> X;
 
-    long long pos = 0;   // 현재 위치
-    long long v = 1;     // 현재 속도
-    int time = 0;
+    long long result = solve_min_time(X);
 
-    while (pos < X) {
-        time++;
-        pos += v;
-
-        if (pos == X) break;
-
-        // 다음 단계 결정 로직:
-        // (v+1)로 올렸을 때, 나중에 1까지 줄이는 데 필요한 최소 거리 계산
-        long long next_v = v + 1;
-        long long required_dist = (next_v * (next_v + 1)) / 2;
-
-        if (pos + required_dist <= X) {
-            v++; // 속도 증가 가능
-        } else if (pos + (v * (v - 1)) / 2 <= X) {
-            // 현재 속도 v를 유지해도 멈출 수 있는지 확인
-            // (속도를 유지하는 것이 더 빠를 때)
-        } else {
-            v--; // 당장 줄여야 함
-        }
-    }
-
-    cout << time + 1 << endl;
+    cout << result << endl;
     return 0;
 }
