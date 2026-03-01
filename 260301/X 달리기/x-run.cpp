@@ -8,6 +8,7 @@ int minTime = INT_MAX;
 
 void f(int space, int acc, int time)
 {
+    if(acc <= 0) return;
     if(time >= minTime) return;
 
     if(space >= X) 
@@ -24,7 +25,7 @@ void f(int space, int acc, int time)
 
     // cout << space << ' ' << acc << ' ' << time << '\n';
 
-    if(acc > 1) f(space + acc, acc - 1, time + 1);
+    f(space + acc, acc - 1, time + 1);
     f(space + acc, acc, time + 1);
     f(space + acc, acc + 1, time + 1);
     
