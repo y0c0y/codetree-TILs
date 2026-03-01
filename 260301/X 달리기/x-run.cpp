@@ -3,21 +3,28 @@
 using namespace std;
 
 int X;
-vector<pair<int, int>> result;
+
+int minTime = INT_MAX;
 
 void f(int space, int acc, int time)
 {
+    if(time >= minTime) return;
+
     if(space >= X) 
     {
         if(space == X && acc == 1) 
         {
-            pair<int, int> tmp = make_pair(acc, time);
-            result.push_back(tmp);
+            if(time < minTime){
+                // cout << "Changed : " << minTime << ' ' << time << '\n';
+                minTime = time;
+            }
         }
         return;
     }
 
-    if(acc - 1 > 0) f(space + acc, acc - 1, time + 1);
+    // cout << space << ' ' << acc << ' ' << time << '\n';
+
+    if(acc > 1) f(space + acc, acc - 1, time + 1);
     f(space + acc, acc, time + 1);
     f(space + acc, acc + 1, time + 1);
     
@@ -28,15 +35,7 @@ int main() {
 
     f(0,1,0);
 
-    sort(result.begin(), result.end());
-
-    int acc, time;
-
-    tie(acc, time) = result[0];
-
-    cout<< time + 1;
-
-
+    cout<< minTime + 1;
 
     return 0;
 }
